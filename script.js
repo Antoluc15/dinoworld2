@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const API_URL = "https://dinoworld2-production.up.railway.app/api.php"; // URL completa del API
     const dinoForm = document.getElementById("dinoForm");
     const dinoList = document.getElementById("dinoList");
 
     // Función para cargar todos los dinosaurios
     function fetchDinosaurios() {
-        fetch("api.php")
+        fetch(API_URL)
             .then(response => response.json())
             .then(data => {
                 dinoList.innerHTML = "";
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const id = document.getElementById("dinoId").value;
         const method = id ? "PUT" : "POST";
-        const url = id ? `api.php?id=${id}` : "api.php";
+        const url = id ? `${API_URL}?id=${id}` : API_URL;
         
         const dinoData = {
             nombre: document.getElementById("nombre").value,
@@ -65,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para editar un dinosaurio
     window.editDino = (id) => {
-        fetch(`api.php?id=${id}`)
+        fetch(`${API_URL}?id=${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data); // Verifica la respuesta del servidor aquí
@@ -79,10 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Error al editar dinosaurio:", error));
     };
    
-
     // Función para eliminar un dinosaurio
     window.deleteDino = (id) => {
-        fetch(`api.php?id=${id}`, {method: "DELETE"})
+        fetch(`${API_URL}?id=${id}`, {method: "DELETE"})
             .then(() => fetchDinosaurios())
             .catch(error => console.error("Error al eliminar dinosaurio:", error));
     };
