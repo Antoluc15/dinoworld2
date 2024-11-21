@@ -2,8 +2,22 @@
 // Establecer la cabecera para indicar que los datos son en formato JSON
 header('Content-Type: application/json');
 
-// Conectar con la base de datos (ajusta los datos de conexión a tu base de datos)
-$pdo = new PDO('mysql:host=localhost;dbname=dinoworld', 'root', ''); // Cambia el usuario y la contraseña
+// Conectar con la base de datos PostgreSQL utilizando los datos proporcionados por Railway
+$host = 'postgres.railway.internal';  // Host de PostgreSQL
+$port = '5432';  // Puerto
+$dbname = 'railway';  // Nombre de la base de datos
+$username = 'postgres';  // Usuario
+$password = 'DZPJJGlePMtBqPuWVwpiifqWyvvKkpuI';  // Contraseña
+
+try {
+    // Conexión PDO a PostgreSQL
+    $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //echo "Conexión exitosa a PostgreSQL."; // Para verificar si la conexión es exitosa
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+    die();
+}
 
 // Obtener el método de la solicitud
 $method = $_SERVER['REQUEST_METHOD'];
