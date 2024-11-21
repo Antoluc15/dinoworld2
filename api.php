@@ -12,11 +12,12 @@ try {
     // Conexión PDO a PostgreSQL
     $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Conexión exitosa a PostgreSQL."; // Para verificar si la conexión es exitosa
+    echo "Conexión exitosa a PostgreSQL."; // Verificar si la conexión es exitosa
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
     die();
 }
+
 
 // Obtener el método de la solicitud
 $method = $_SERVER['REQUEST_METHOD'];
