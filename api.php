@@ -2,9 +2,8 @@
 // Establecer la cabecera para indicar que los datos son en formato JSON
 header('Content-Type: application/json');
 
-// Conectar con la base de datos PostgreSQL utilizando los datos proporcionados por Railway
-$host = 'postgres.railway.internal';  // Host de PostgreSQL
-$port = '5432';  // Puerto
+$host = 'junction.proxy.rlwy.net';  // Host de PostgreSQL desde la URL de conexión pública
+$port = '21824';  // Puerto de la URL de conexión pública
 $dbname = 'railway';  // Nombre de la base de datos
 $username = 'postgres';  // Usuario
 $password = 'DZPJJGlePMtBqPuWVwpiifqWyvvKkpuI';  // Contraseña
