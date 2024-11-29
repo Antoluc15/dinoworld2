@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
 
         // Cargar imágenes
         const dinoImg = new Image();
-        dinoImg.src = 'img/dinosaurio/Run (5).png'; // Imagen del dinosaurio
+        dinoImg.src = 'img/dinosaurio/vecteezy_brontosaurus-jump-png-illustrations_23271261.png'; // Imagen del dinosaurio
         const cactusImg = new Image();
         cactusImg.src = 'img/cactus/vecteezy_simple-cactus-cartoon-illustration_9514641.jpg'; // Imagen de cactus
         const bgImg = new Image();
