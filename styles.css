@@ -181,6 +181,12 @@ body {
     border-radius: 0 0 10px 10px;
 }
 
+#dinoGameContainer {
+    position: relative; /* Asegura que los elementos dentro del contenedor tengan posiciones relativas */
+    z-index: 1; /* Asigna un z-index bajo para que otros elementos puedan estar encima */
+}
+
+
 .dino-game-section {
     margin-top: 30px;
     text-align: center;
@@ -219,12 +225,13 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: absolute; /* Asegura que esté sobre otros elementos */
+    position: fixed; /* Usa position: fixed para que esté siempre visible */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10; /* Asegura que esté por encima de otros elementos */
+    z-index: 999; /* Asegura que esté por encima de todos los elementos */
 }
+
 
 #restartGameButton:active {
     background-color: #45a049;
