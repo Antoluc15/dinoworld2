@@ -76,8 +76,12 @@ window.addEventListener('load', () => {
             ctx.font = '20px Arial';
             ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
             restartGameButton.style.display = 'block'; // Mostrar el botón de reinicio
+            restartGameButton.style.zIndex = '10'; // Asegúrate de que esté en frente
         };
 
+      
+
+        
         // Actualizar los obstáculos
         const updateObstacles = () => {
             obstacles.forEach((obstacle) => {
