@@ -6,9 +6,14 @@ window.addEventListener('load', () => {
     let obstacleFrequency = 100;
     let score = 0;
     let gameOver = false;
+    let gameInterval;  // Variable para almacenar el intervalo del juego
 
     const startGame = () => {
         gameOver = false;
+        score = 0;
+        gameSpeed = 2;
+        obstacleFrequency = 100;
+
         dinoGameContainer.innerHTML = '';
 
         const title = document.createElement('h3');
@@ -25,10 +30,7 @@ window.addEventListener('load', () => {
     };
 
     const restartGame = () => {
-        score = 0;
-        gameSpeed = 2;
-        obstacleFrequency = 100;
-        gameOver = false;
+        clearInterval(gameInterval);  // Limpiar el intervalo del juego anterior
         startGame();
     };
 
@@ -135,6 +137,7 @@ window.addEventListener('load', () => {
                 drawScore();
             } else {
                 showGameOverMessage();
+                clearInterval(gameInterval);  // Detener el intervalo del juego cuando se pierde
             }
         };
 
@@ -146,7 +149,7 @@ window.addEventListener('load', () => {
         };
 
         // Iniciar el loop del juego
-        setInterval(() => {
+        gameInterval = setInterval(() => {
             updateGame();
             createObstacle();
         }, 1000 / 60);
