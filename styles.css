@@ -223,6 +223,7 @@ body {
 #chrome-dino-game h2 {
     font-size: 2rem;
     color: #2c3e50;
+    margin-bottom: 20px;
 }
 
 #chrome-dino-game #game-container {
@@ -230,26 +231,9 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-#chrome-dino-game #game-over {
-    display: none; /* Asegúrate de que inicialmente esté oculto */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: red;
+#chrome-dino-game p {
+    font-size: 1rem;
+    color: #34495e;
 }
 
-#chrome-dino-game button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#chrome-dino-game button:hover {
-    background-color: #2980b9;
-}
 
