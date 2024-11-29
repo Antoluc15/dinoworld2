@@ -1,6 +1,5 @@
 window.addEventListener('load', () => {
     const startGameButton = document.getElementById('startGameButton');
-    const restartGameButton = document.getElementById('restartGameButton');
     const dinoGameContainer = document.getElementById('dinoGameContainer');
 
     let gameSpeed = 2;
@@ -21,8 +20,6 @@ window.addEventListener('load', () => {
         canvas.width = 800;
         canvas.height = 200;
         dinoGameContainer.appendChild(canvas);
-
-        restartGameButton.style.display = 'none'; // Inicia oculto
 
         startDinoGame();
     };
