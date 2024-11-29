@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
 
         // Cargar imágenes
         const dinoImg = new Image();
-        dinoImg.src = 'img/dinosaurio/Run (1).png'; // Imagen del dinosaurio
+        dinoImg.src = 'img/dinosaurio/Run (5).png'; // Imagen del dinosaurio
         const cactusImg = new Image();
         cactusImg.src = 'img/cactus/vecteezy_simple-cactus-cartoon-illustration_9514641.jpg'; // Imagen de cactus
         const bgImg = new Image();
@@ -55,20 +55,24 @@ window.addEventListener('load', () => {
         let jumpHeight = -15;
         let obstacles = [];
 
+        // Función para dibujar el fondo
         const drawBackground = () => {
             ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
         };
 
+        // Función para dibujar el dinosaurio
         const drawDino = () => {
             ctx.drawImage(dinoImg, 0, 0, 60, 60, dino.x, dino.y, dino.width, dino.height);
         };
 
+        // Función para dibujar los obstáculos
         const drawObstacles = () => {
             obstacles.forEach((obstacle) => {
                 ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
             });
         };
 
+        // Actualizar los obstáculos
         const updateObstacles = () => {
             obstacles.forEach((obstacle) => {
                 obstacle.x -= gameSpeed; // La velocidad de los obstáculos ahora depende de gameSpeed
@@ -78,6 +82,7 @@ window.addEventListener('load', () => {
             }
         };
 
+        // Detectar colisiones
         const detectCollisions = () => {
             obstacles.forEach((obstacle) => {
                 if (
@@ -92,6 +97,7 @@ window.addEventListener('load', () => {
             });
         };
 
+        // Actualizar el estado del juego
         const updateGame = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBackground(); // Dibujar fondo
@@ -122,6 +128,7 @@ window.addEventListener('load', () => {
             detectCollisions();
         };
 
+        // Crear obstáculos
         const createObstacle = () => {
             if (Math.random() < 1 / obstacleFrequency) {
                 let height = 150 + Math.random() * 30;
@@ -129,11 +136,13 @@ window.addEventListener('load', () => {
             }
         };
 
+        // Iniciar el loop del juego
         setInterval(() => {
             updateGame();
             createObstacle();
         }, 1000 / 60);
 
+        // Detectar evento de salto
         document.addEventListener('keydown', (event) => {
             if (event.key === " " && dino.y === 150) {
                 isJumping = true;
@@ -145,4 +154,3 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
-
