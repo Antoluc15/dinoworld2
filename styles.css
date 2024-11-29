@@ -70,7 +70,7 @@ html, body {
     color: #333;
     position: sticky; /* Fija el título al desplazarse */
     top: 0;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.5);
     z-index: 10;
     padding: 10px 0;
 }
