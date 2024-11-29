@@ -46,10 +46,9 @@ window.addEventListener('load', () => {
         const bgImg = new Image();
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
-        let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, speed: 5 };
-        let gravity = 1.5;  // Ajustamos la gravedad para que el dinosaurio caiga más rápido
-        let isJumping = false;
-        let jumpHeight = -20;  // Ajustamos la altura del salto para que sea más alto
+        let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, isJumping: false, jumpSpeed: 0 };
+        let gravity = 0.8;
+        let jumpHeight = -15;
         let obstacles = [];
 
         // Función para dibujar el fondo
@@ -108,22 +107,15 @@ window.addEventListener('load', () => {
             drawBackground();
 
             if (!gameOver) {
-                if (isJumping) {
-                    dino.dy = jumpHeight;  // El salto se activa
-                    isJumping = false;
-                } else {
-                    if (dino.y + dino.height < 150) {
-                        dino.dy += gravity; // La gravedad mantiene el salto más lento
-                    } else {
-                        dino.dy = 0;
-                        dino.y = 150;  // El dinosaurio vuelve al suelo
-                    }
-                }
-                dino.y += dino.dy;
+                if (dino.isJumping) {
+                    dino.jumpSpeed += gravity;
+                    dino.y += dino.jumpSpeed;
 
-                if (score % 100 === 0 && score !== 0) {
-                    gameSpeed += 0.5;
-                    obstacleFrequency -= 5;
+                    if (dino.y >= 150) {
+                        dino.y = 150;
+                        dino.isJumping = false;
+                        dino.jumpSpeed = 0;
+                    }
                 }
 
                 updateObstacles();
@@ -150,8 +142,9 @@ window.addEventListener('load', () => {
 
         // Detectar salto del dinosaurio
         document.addEventListener('keydown', (event) => {
-            if (event.key === " " && dino.y === 150 && !gameOver) {
-                isJumping = true;
+            if (event.key === " " && !dino.isJumping && !gameOver) {
+                dino.isJumping = true;
+                dino.jumpSpeed = jumpHeight;
             }
         });
     };
