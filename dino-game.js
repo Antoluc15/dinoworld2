@@ -79,7 +79,6 @@ window.addEventListener('load', () => {
             restartGameButton.style.zIndex = '10'; // Asegúrate de que esté en frente
         };
 
-
         // Actualizar los obstáculos
         const updateObstacles = () => {
             obstacles.forEach((obstacle) => {
