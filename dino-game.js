@@ -47,8 +47,8 @@ window.addEventListener('load', () => {
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
         let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, isJumping: false, jumpSpeed: 0 };
-        let gravity = 0.8;
-        let jumpHeight = -15;
+        let gravity = 0.4;  // Ajustamos la gravedad para que el dinosaurio caiga más lento
+        let jumpHeight = -10;  // Ajustamos la altura del salto para que sea más controlado
         let obstacles = [];
 
         // Función para dibujar el fondo
@@ -76,7 +76,6 @@ window.addEventListener('load', () => {
             ctx.font = '20px Arial';
             ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
             restartGameButton.style.display = 'block'; // Mostrar el botón de reinicio
-            restartGameButton.style.zIndex = '10'; // Asegúrate de que esté en frente
         };
 
         // Actualizar los obstáculos
