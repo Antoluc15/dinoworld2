@@ -22,6 +22,8 @@ window.addEventListener('load', () => {
         canvas.height = 200;
         dinoGameContainer.appendChild(canvas);
 
+        restartGameButton.style.display = 'none';
+
         startDinoGame();
     };
 
@@ -71,6 +73,7 @@ window.addEventListener('load', () => {
                 ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
                 ctx.font = '20px Arial';
                 ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
+                restartGameButton.style.display = 'block'; // Mostrar el botón de reiniciar
             };
 
             const updateObstacles = () => {
@@ -101,7 +104,7 @@ window.addEventListener('load', () => {
                 if (!gameOver) {
                     if (isJumping) {
                         dino.dy = jumpHeight;
-                        isJumping = false; // Evitar que el dino siga saltando
+                        isJumping = false;
                     } else {
                         if (dino.y + dino.height < 150) {
                             dino.dy += gravity;
