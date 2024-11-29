@@ -1,22 +1,9 @@
-/* Reset de márgenes y relleno */
-* {
+/* Aseguramos que la página se mantenga con un flujo adecuado */
+body, html {
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .container {
@@ -177,56 +164,36 @@ body {
     margin-top: auto;
 }
 
+/* Estilos específicos para el juego */
 #chrome-dino-game {
-    text-align: center;
-    margin: 50px auto;
-    
-    h2 {
-        font-size: 2rem;
-        color: #2c3e50;
-    }
-
-    #game-container {
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #game-over {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: red;
-        display: none; /* Asegúrate de que inicialmente esté oculto */
-    }
-
-    button {
-        background-color: #3498db;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #2980b9;
-        }
-    }
-}
-
-#chrome-dino-game {
+    width: 100%;
+    max-width: 800px;
     margin-top: 40px;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-#gameCanvas {
-    border: 2px solid #000;
-    margin-top: 10px;
+#game-container {
+    margin: 20px 0;
+    position: relative;
+    width: 100%;
+    height: 200px;
     background-color: #ffffff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #f5f5f5;
+    border-radius: 8px;
 }
 
 button {
@@ -236,13 +203,12 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
 }
 
 button:hover {
-    background-color: #ccc;
-}
-
-    color: #34495e;
+    background-color: #0056b3;
 }
 
 
