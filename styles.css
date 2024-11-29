@@ -16,6 +16,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-color: green;
+    height: 100vh;
 }
 
 /* Contenedor principal */
