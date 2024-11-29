@@ -124,7 +124,7 @@ window.addEventListener('load', () => {
                             dino.dy += gravity;  // La gravedad influye en el salto
                         } else {
                             dino.dy = 0;
-                            dino.y = 150;
+                            dino.y = 150;  // Asegurarse de que el dinosaurio vuelva al suelo
                             isJumping = false;
                         }
                     }
