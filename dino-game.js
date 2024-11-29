@@ -1,86 +1,121 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('game-container');
-    container.style.position = 'relative';
-    container.style.width = '800px';
-    container.style.height = '200px';
-    container.style.backgroundColor = '#f7f7f7';
-    container.style.border = '2px solid #ccc';
-    container.style.overflow = 'hidden';
-    container.style.margin = '0 auto';
+window.addEventListener('load', () => {
+    const startGame = () => {
+        const body = document.body;
+        body.innerHTML = `<h2>¡Juego del Dinosaurio!</h2>
+        <p>Presiona "Espacio" para comenzar</p>`;
 
-    const dino = document.createElement('div');
-    dino.style.position = 'absolute';
-    dino.style.width = '40px';
-    dino.style.height = '40px';
-    dino.style.backgroundColor = 'black';
-    dino.style.bottom = '10px';
-    dino.style.left = '50px';
-    container.appendChild(dino);
-
-    const cactus = document.createElement('div');
-    cactus.style.position = 'absolute';
-    cactus.style.width = '20px';
-    cactus.style.height = '40px';
-    cactus.style.backgroundColor = 'green';
-    cactus.style.bottom = '10px';
-    cactus.style.right = '0';
-    container.appendChild(cactus);
-
-    let isJumping = false;
-    let dinoBottom = 10;
-    const gravity = 2;
-
-    function jump() {
-        if (isJumping) return;
-        isJumping = true;
-
-        let upInterval = setInterval(() => {
-            if (dinoBottom >= 150) {
-                clearInterval(upInterval);
-                let downInterval = setInterval(() => {
-                    if (dinoBottom <= 10) {
-                        clearInterval(downInterval);
-                        isJumping = false;
-                    }
-                    dinoBottom -= gravity;
-                    dino.style.bottom = dinoBottom + 'px';
-                }, 20);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === " " || event.key === "Enter") {
+                body.innerHTML = `
+                    <h2>¡Juega con el Dinosaurio!</h2>
+                    <p>Presiona "Espacio" para saltar</p>
+                    <canvas id="gameCanvas"></canvas>`;
+                startDinoGame();
             }
-            dinoBottom += 20;
-            dino.style.bottom = dinoBottom + 'px';
-        }, 20);
-    }
+        });
+    };
 
-    function moveCactus() {
-        let cactusLeft = 800;
+    const startDinoGame = () => {
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 200;
 
-        function move() {
-            cactusLeft -= 10;
-            cactus.style.left = cactusLeft + 'px';
+        // Imágenes de recursos
+        const dinoImg = new Image();
+        dinoImg.src = 'img/dinosaurio/Run (1).png';
 
-            if (cactusLeft < -20) {
-                cactusLeft = 800;
+        const cactusImg = new Image();
+        cactusImg.src = 'img/cactus/vecteezy_simple-cactus-cartoon-illustration_9514641.jpg'; 
+
+        const bgImg = new Image();
+        bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg'; // Ruta de fondo
+
+        let dino = { x: 50, y: 150, width: 40, height: 40, dy: 0, speed: 5 };
+        let gravity = 1;
+        let isJumping = false;
+        let jumpHeight = -15;
+        let obstacles = [];
+        let obstacleFrequency = 100;
+
+        const drawBackground = () => {
+            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+        };
+
+        const drawDino = () => {
+            ctx.drawImage(dinoImg, 0, 0, 60, 60, dino.x, dino.y, dino.width, dino.height); // Se puede ajustar según el tamaño del sprite
+        };
+
+        const drawObstacles = () => {
+            obstacles.forEach((obstacle) => {
+                ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        };
+
+        const updateObstacles = () => {
+            obstacles.forEach((obstacle) => {
+                obstacle.x -= 5; // Velocidad de los obstáculos
+            });
+            if (obstacles[0] && obstacles[0].x < 0) {
+                obstacles.shift();
             }
+        };
 
-            if (
-                cactusLeft > 50 && cactusLeft < 90 &&
-                dinoBottom <= 50
-            ) {
-                alert('¡Perdiste!');
-                cactusLeft = 800;
+        const detectCollisions = () => {
+            obstacles.forEach((obstacle) => {
+                if (
+                    dino.x + dino.width > obstacle.x &&
+                    dino.x < obstacle.x + obstacle.width &&
+                    dino.y + dino.height > obstacle.y
+                ) {
+                    // Colisión detectada, reiniciar juego
+                    alert('¡Has perdido!');
+                    startGame();
+                }
+            });
+        };
+
+        const updateGame = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground(); // Dibujar fondo
+            if (isJumping) {
+                dino.dy = jumpHeight;
+            } else {
+                if (dino.y + dino.height < 150) {
+                    dino.dy += gravity;
+                } else {
+                    dino.dy = 0;
+                    dino.y = 150;
+                    isJumping = false;
+                }
             }
+            dino.y += dino.dy;
+            updateObstacles();
+            drawDino();
+            drawObstacles();
+            detectCollisions();
+        };
 
-            requestAnimationFrame(move);
-        }
-        move();
-    }
+        const createObstacle = () => {
+            if (Math.random() < 0.05) {
+                let height = 150 + Math.random() * 30;
+                obstacles.push({ x: canvas.width, y: height, width: 20, height: 30 });
+            }
+        };
 
-    moveCactus();
+        setInterval(() => {
+            updateGame();
+            createObstacle();
+        }, 1000 / 60);
 
-    document.addEventListener('keydown', (event) => {
-        if (event.code === 'Space') {
-            jump();
-        }
-    });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === " " && dino.y === 150) {
+                isJumping = true;
+            }
+        });
+    };
+
+    startGame();
 });
+
 
