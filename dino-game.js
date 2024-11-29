@@ -67,7 +67,8 @@ window.addEventListener('load', () => {
 
             // Función para dibujar el dinosaurio
             const drawDino = () => {
-                ctx.drawImage(dinoImg, 0, 0, 60, 60, dino.x, dino.y, dino.width, dino.height);
+                // Redimensionar la imagen del dinosaurio para que se ajuste al lienzo
+                ctx.drawImage(dinoImg, 0, 0, dinoImg.width, dinoImg.height, dino.x, dino.y, dino.width, dino.height);
             };
 
             // Función para dibujar los obstáculos
