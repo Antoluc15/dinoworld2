@@ -7,17 +7,16 @@
 
 html, body {
     height: 100%;
-    overflow-y: auto; /* Permite desplazamiento vertical */
-    background: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg') no-repeat center center fixed; /* Evita la duplicación */
-    background-size: cover; /* Asegura que cubra toda la pantalla */
+    overflow-y: auto;
+    background: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Evita que el contenido se centre verticalmente */
-    overflow-y: auto;
+    align-items: flex-start;
 }
 
 .container {
@@ -26,7 +25,7 @@ body {
     min-height: 100vh;
     max-width: 1200px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9); /* Fondo más opaco */
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -54,27 +53,11 @@ body {
 .content h1 {
     font-size: 2.5rem;
     color: #333;
-    position: sticky; /* Se mantiene visible al hacer scroll */
-    top: 0; /* Se fija en la parte superior */
-    background: rgba(255, 255, 255, 0.9); /* Fondo sólido para el título */
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 10;
     padding: 10px 0;
-    z-index: 10; /* Se asegura de que esté al frente */
-}
-
-.content p, .content a {
-    font-size: 1.2rem;
-    color: #444;
-    margin-top: 10px;
-}
-
-.content a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.content a:hover {
-    text-decoration: underline;
 }
 
 /* Sección de Administración */
@@ -82,13 +65,6 @@ body {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.admin-section h2 {
-    color: #333;
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -100,83 +76,27 @@ body {
     margin-bottom: 20px;
 }
 
-#dinoForm input, #dinoForm textarea, #dinoForm button {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #5924bb;
-    border-radius: 5px;
-}
-
-#dinoForm textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-#dinoForm button {
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-#dinoForm button:hover {
-    background-color: #218838;
-}
-
 /* Lista de Dinosaurios */
 #dinoList {
     list-style: none;
     padding: 0;
-    margin-top: 20px;
-    max-height: 400px; /* Limita la altura */
-    overflow-y: auto; /* Permite desplazamiento en la lista */
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 #dinoList li {
     background-color: #fff;
-    border: 1px solid #ddd;
     padding: 15px;
-    border-radius: 5px;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#dinoList button {
-    padding: 5px 10px;
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-#dinoList button:nth-child(1) {
-    background-color: #007bff;
-    color: white;
-}
-
-#dinoList button:nth-child(1):hover {
-    background-color: #0056b3;
-}
-
-#dinoList button:nth-child(2) {
-    background-color: #dc3545;
-    color: white;
-}
-
-#dinoList button:nth-child(2):hover {
-    background-color: #c82333;
 }
 
 /* Footer */
 .footer {
     background-color: #333;
     color: #fff;
-    padding: 15px;
     text-align: center;
-    border-radius: 0 0 10px 10px;
+    padding: 15px;
     margin-top: auto;
 }
