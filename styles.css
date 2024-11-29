@@ -209,26 +209,7 @@ body {
     margin-right: auto;
 }
 
-/* Estilo para el botón de reinicio */
-#restartGameButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: none;
-    position: absolute;
-    z-index: 10;
-    top: 70%; /* Ajusta la posición si es necesario */
-    left: 50%;
-    transform: translateX(-50%);
-}
 
-
-#restartGameButton:active {
-    background-color: #45a049;
-}
 
 
 
