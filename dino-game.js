@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
         canvas.height = 200;
         dinoGameContainer.appendChild(canvas);
 
-        restartGameButton.style.display = 'none';
+        restartGameButton.style.display = 'none';  // Esconder el botón de reiniciar al iniciar el juego
 
         startDinoGame();
     };
@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
         gameSpeed = 2;
         obstacleFrequency = 100;
         gameOver = false;
-        startGame();
+        startGame(); // Reiniciar el juego
     };
 
     const startDinoGame = () => {
@@ -73,7 +73,7 @@ window.addEventListener('load', () => {
                 ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
                 ctx.font = '20px Arial';
                 ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
-                restartGameButton.style.display = 'block';
+                restartGameButton.style.display = 'block';  // Mostrar el botón de reiniciar
             };
 
             const updateObstacles = () => {
@@ -102,19 +102,21 @@ window.addEventListener('load', () => {
                 drawBackground();
 
                 if (!gameOver) {
+                    // Movimiento del dinosaurio con gravedad
                     if (isJumping) {
-                        dino.dy = jumpHeight;
-                        isJumping = false;
+                        dino.dy = jumpHeight; // Asignar velocidad de salto
+                        isJumping = false;    // Asegurarse de que no se active el salto varias veces
                     } else {
                         if (dino.y + dino.height < 150) {
-                            dino.dy += gravity;
+                            dino.dy += gravity;  // Aplicar la gravedad
                         } else {
                             dino.dy = 0;
-                            dino.y = 150;
+                            dino.y = 150;  // Asegurarse que el dinosaurio esté en el suelo
                         }
                     }
                     dino.y += dino.dy;
 
+                    // Aumentar la velocidad de los obstáculos con el tiempo
                     if (score % 100 === 0 && score !== 0) {
                         gameSpeed += 0.5;
                         obstacleFrequency -= 5;
@@ -125,7 +127,7 @@ window.addEventListener('load', () => {
                     drawObstacles();
                     detectCollisions();
                 } else {
-                    showGameOverMessage();
+                    showGameOverMessage();  // Mostrar el mensaje de fin de juego
                 }
             };
 
@@ -140,9 +142,10 @@ window.addEventListener('load', () => {
                 createObstacle();
             }, 1000 / 60);
 
+            // Evento de salto
             document.addEventListener('keydown', (event) => {
                 if (event.key === " " && dino.y === 150 && !gameOver) {
-                    isJumping = true;
+                    isJumping = true;  // Iniciar el salto
                 }
             });
         };
@@ -153,4 +156,3 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
-
