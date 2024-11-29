@@ -208,8 +208,9 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
 #restartGameButton {
-    display: none;  /* Lo ocultamos inicialmente */
+    display: none;  /* Lo mantenemos oculto inicialmente */
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 18px;
