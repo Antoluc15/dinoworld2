@@ -46,10 +46,11 @@ window.addEventListener('load', () => {
         const bgImg = new Image();
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
-        let dino = { x: 50, y: 150, width: 40, height: 40, dy: 0, speed: 5 };
+        let dino = { x: 50, y: 150, width: 40, height: 40, speed: 5 };
         let gravity = 0.6;  // Gravedad más suave
-        let isJumping = false;
         let jumpHeight = -12;  // Ajustar la altura del salto
+        let isJumping = false;
+        let jumpVelocity = 0;
         let obstacles = [];
 
         dinoImg.onload = () => {
@@ -102,19 +103,19 @@ window.addEventListener('load', () => {
                 drawBackground();
 
                 if (!gameOver) {
-                    // Movimiento del dinosaurio con gravedad
+                    // Lógica de salto
                     if (isJumping) {
-                        dino.dy = jumpHeight; // Asignar velocidad de salto
-                        isJumping = false;    // Asegurarse de que no se active el salto varias veces
+                        jumpVelocity = jumpHeight;
+                        isJumping = false;  // Impide que el dinosaurio salte más de una vez sin caer
                     } else {
                         if (dino.y + dino.height < 150) {
-                            dino.dy += gravity;  // Aplicar la gravedad
+                            jumpVelocity += gravity; // Caída por gravedad
                         } else {
-                            dino.dy = 0;
-                            dino.y = 150;  // Asegurarse que el dinosaurio esté en el suelo
+                            jumpVelocity = 0;
+                            dino.y = 150; // Aseguramos que el dinosaurio esté en el suelo
                         }
                     }
-                    dino.y += dino.dy;
+                    dino.y += jumpVelocity;
 
                     // Aumentar la velocidad de los obstáculos con el tiempo
                     if (score % 100 === 0 && score !== 0) {
@@ -145,7 +146,7 @@ window.addEventListener('load', () => {
             // Evento de salto
             document.addEventListener('keydown', (event) => {
                 if (event.key === " " && dino.y === 150 && !gameOver) {
-                    isJumping = true;  // Iniciar el salto
+                    isJumping = true;  // Iniciar el salto solo si está en el suelo
                 }
             });
         };
@@ -156,3 +157,4 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
+
