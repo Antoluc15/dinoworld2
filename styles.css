@@ -7,6 +7,7 @@
 
 html, body {
     height: 100%;
+    overflow-y: auto; /* Permite desplazamiento si hay muchos elementos */
 }
 
 body {
@@ -14,9 +15,11 @@ body {
     background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat; /* Evita la duplicación de la imagen */
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la pantalla */
 }
 
 .container {
@@ -25,10 +28,11 @@ body {
     min-height: 100vh;
     max-width: 1200px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.8); /* Ajusta la opacidad del fondo */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Evita desbordamientos */
 }
 
 /* Header */
@@ -53,6 +57,8 @@ body {
 .content h1 {
     font-size: 2.5rem;
     color: #333;
+    position: relative;
+    z-index: 1;  /* Evita que otros elementos cubran el título */
 }
 
 .content p, .content a {
@@ -73,7 +79,7 @@ body {
 
 /* Sección de Administración */
 .admin-section {
-    background: #fcfcfc28;
+    background: rgba(255, 255, 255, 0.8); /* Ajusta opacidad */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -108,7 +114,7 @@ body {
 
 #dinoForm button {
     background-color: #28a745;
-    color: rgb(233, 233, 233);
+    color: white;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
@@ -123,6 +129,8 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 20px;
+    max-height: 400px;  /* Limita la altura */
+    overflow-y: auto;   /* Permite desplazamiento si hay muchos elementos */
 }
 
 #dinoList li {
@@ -134,10 +142,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-#dinoList li button {
-    margin-left: 10px;
 }
 
 #dinoList button {
@@ -176,3 +180,4 @@ body {
     border-radius: 0 0 10px 10px;
     margin-top: auto;
 }
+
