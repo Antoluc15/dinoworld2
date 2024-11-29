@@ -47,8 +47,8 @@ window.addEventListener('load', () => {
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
         let dino = { x: 50, y: 150, width: 40, height: 40, speed: 5 };
-        let gravity = 0.6;  // Gravedad más suave
-        let jumpHeight = -36;  // Ajustar la altura del salto a 3 veces lo anterior
+        let gravity = 0.2;  // Gravedad más suave para un salto más lento
+        let jumpHeight = -30;  // Salto más alto (triplicado)
         let isJumping = false;
         let jumpVelocity = 0;
         let obstacles = [];
