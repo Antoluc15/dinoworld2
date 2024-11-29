@@ -40,16 +40,16 @@ window.addEventListener('load', () => {
         const ctx = canvas.getContext('2d');
 
         const dinoImg = new Image();
-        dinoImg.src = 'img/dinosaurio/vecteezy_brontosaurus-jump-png-illustrations_23271261.png'; // Cambia la ruta si es necesario
+        dinoImg.src = 'img/dinosaurio/vecteezy_brontosaurus-jump-png-illustrations_23271261.png'; // Asegúrate de que la ruta sea correcta
         const cactusImg = new Image();
         cactusImg.src = 'img/cactus/vecteezy_simple-cactus-cartoon-illustration_9514641.jpg';
         const bgImg = new Image();
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
         let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, speed: 5 };
-        let gravity = 0.4;  // Gravedad ajustada para un salto más suave
+        let gravity = 0.8;  // Aumentamos la gravedad para que el dinosaurio caiga más rápido
         let isJumping = false;
-        let jumpHeight = -25;  // Hacemos el salto más alto
+        let jumpHeight = -40;  // Hacemos el salto más alto
         let obstacles = [];
 
         // Función para dibujar el fondo
@@ -159,4 +159,3 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
-
