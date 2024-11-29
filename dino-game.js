@@ -47,9 +47,9 @@ window.addEventListener('load', () => {
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
         let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, speed: 5 };
-        let gravity = 1;  // Aumentamos la gravedad para que el dinosaurio caiga más rápido
+        let gravity = 1.5;  // Ajustamos la gravedad para que el dinosaurio caiga más rápido
         let isJumping = false;
-        let jumpHeight = -15;  // Hacemos el salto más alto
+        let jumpHeight = -20;  // Ajustamos la altura del salto para que sea más alto
         let obstacles = [];
 
         // Función para dibujar el fondo
