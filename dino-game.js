@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
         canvas.height = 200;
         dinoGameContainer.appendChild(canvas);
 
-        restartGameButton.style.display = 'none'; // Inicialmente oculto
+        restartGameButton.style.display = 'none'; // Inicia oculto
 
         startDinoGame();
     };
@@ -46,11 +46,9 @@ window.addEventListener('load', () => {
         const bgImg = new Image();
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
-        let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, speed: 5 };
-        let gravity = 0.8;  // Ajustar la gravedad
-        let isJumping = false;
-        let jumpHeight = -25;  // Ajustar la altura del salto
-        let jumpSpeed = 0;  // Velocidad de subida del salto
+        let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, isJumping: false, jumpSpeed: 0 };
+        let gravity = 0.8;
+        let jumpHeight = -15;
         let obstacles = [];
 
         // Función para dibujar el fondo
@@ -109,27 +107,15 @@ window.addEventListener('load', () => {
             drawBackground();
 
             if (!gameOver) {
-                if (isJumping) {
-                    // Si el dinosaurio está saltando, aplicamos un salto suave
-                    if (jumpSpeed < jumpHeight) {
-                        dino.dy = -jumpSpeed; // Hace que el dinosaurio suba más suave
-                        jumpSpeed += 1; // Incrementa la velocidad de subida
-                    } else {
-                        isJumping = false;
-                    }
-                } else {
-                    if (dino.y + dino.height < 150) {
-                        dino.dy += gravity; // La gravedad mantiene el salto más suave
-                    } else {
-                        dino.dy = 0;
-                        dino.y = 150;  // El dinosaurio vuelve al suelo
-                    }
-                }
-                dino.y += dino.dy;
+                if (dino.isJumping) {
+                    dino.jumpSpeed += gravity;
+                    dino.y += dino.jumpSpeed;
 
-                if (score % 100 === 0 && score !== 0) {
-                    gameSpeed += 0.5;
-                    obstacleFrequency -= 5;
+                    if (dino.y >= 150) {
+                        dino.y = 150;
+                        dino.isJumping = false;
+                        dino.jumpSpeed = 0;
+                    }
                 }
 
                 updateObstacles();
@@ -156,9 +142,9 @@ window.addEventListener('load', () => {
 
         // Detectar salto del dinosaurio
         document.addEventListener('keydown', (event) => {
-            if (event.key === " " && dino.y === 150 && !gameOver) {
-                isJumping = true;
-                jumpSpeed = 1; // Reiniciar la velocidad de subida
+            if (event.key === " " && !dino.isJumping && !gameOver) {
+                dino.isJumping = true;
+                dino.jumpSpeed = jumpHeight;
             }
         });
     };
