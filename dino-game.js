@@ -83,12 +83,7 @@ window.addEventListener('load', () => {
             ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
             ctx.font = '20px Arial';
             ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 40);
-            ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 70);
-
-            restartGameButton.style.display = 'block'; // Mostrar el botón de reinicio
-            restartGameButton.style.zIndex = '10'; // Asegúrate de que esté en frente
-            restartGameButton.style.position = 'absolute'; // Aseguramos que esté en una capa superior
-            restartGameButton.style.top = `${canvas.height / 2 + 100}px`; // Ajustamos la posición del botón
+            ctx.fillText('Presiona "Espacio" para reiniciar', canvas.width / 2 - 150, canvas.height / 2 + 70);
         };
 
         // Actualizar los obstáculos
@@ -159,16 +154,19 @@ window.addEventListener('load', () => {
             createObstacle();
         }, 1000 / 60);
 
-        // Detectar salto del dinosaurio
+        // Detectar salto del dinosaurio y reinicio del juego
         document.addEventListener('keydown', (event) => {
-            if (event.key === " " && dino.jumpCount < maxJumps && !gameOver) {
-                dino.isJumping = true;
-                dino.jumpSpeed = jumpHeight;
-                dino.jumpCount++;
+            if (event.key === " " && !gameOver) {
+                if (dino.jumpCount < maxJumps) {
+                    dino.isJumping = true;
+                    dino.jumpSpeed = jumpHeight;
+                    dino.jumpCount++;
+                }
+            } else if (event.key === " " && gameOver) {
+                restartGame();
             }
         });
     };
 
     startGameButton.addEventListener('click', startGame);
-    restartGameButton.addEventListener('click', restartGame);
 });
