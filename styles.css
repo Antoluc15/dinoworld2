@@ -8,14 +8,13 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow: auto; /* Permite el desplazamiento en la página */
+    overflow-y: auto; /* Permite el desplazamiento en toda la página */
 }
 
 /* Fondo principal fijo */
 .background {
     background: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-attachment: fixed; /* Evita que el fondo se mueva al hacer scroll */
     position: fixed;
     top: 0;
     left: 0;
@@ -31,73 +30,41 @@ html, body {
     max-width: 1200px;
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
-    margin: 20px auto;
+    margin: 100px auto; /* Espacio desde el borde superior */
     border-radius: 10px;
     padding: 20px;
-    padding-top: 80px; /* Espacio para el header fijo */
     overflow-y: auto;
-    z-index: 1;
-    height: auto; /* Permite que el contenedor crezca con el contenido */
 }
 
 /* Header */
 .header {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Asegura que el header esté al frente */
+    z-index: 1000; /* Asegura que el header esté visible */
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
+    padding: 15px;
+    text-align: center;
 }
 
 .logo {
     width: 100px;
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Main Content */
-.content {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
+/* Título */
 .content h1 {
     font-size: 2.5rem;
     color: #333;
-    position: sticky; /* Fija el título al desplazarse */
-    top: 0;
+    position: sticky;
+    top: 60px; /* Asegura que el título se mantenga debajo del header */
     background-color: rgba(255, 255, 255, 0.95);
     z-index: 10;
     padding: 10px 0;
-}
-
-.content h2 {
-    font-size: 1.5rem;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-/* Enlace de video */
-.content a {
-    font-size: 1.2rem;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.content a:hover {
-    text-decoration: underline;
-}
-
-/* Sección de Administración */
-.admin-section {
-    background: rgba(240, 240, 240, 0.9);
-    padding: 20px;
-    border-radius: 10px;
     margin-bottom: 20px;
 }
 
@@ -132,8 +99,9 @@ html, body {
 #dinoList {
     list-style: none;
     padding: 0;
-    max-height: 50vh; /* Ocupa solo una fracción de la pantalla */
+    max-height: 400px; /* Define una altura máxima para evitar superposición */
     overflow-y: auto; /* Scroll solo en la lista */
+    margin-bottom: 20px;
 }
 
 #dinoList li {
@@ -182,6 +150,6 @@ html, body {
     padding: 15px;
     text-align: center;
     border-radius: 0 0 10px 10px;
-    margin-top: auto;
+    margin-top: 20px;
 }
 
