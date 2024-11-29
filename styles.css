@@ -7,19 +7,17 @@
 
 html, body {
     height: 100%;
-    overflow-y: auto; /* Permite desplazamiento si hay muchos elementos */
+    overflow-y: auto; /* Permite desplazamiento vertical */
+    background: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg') no-repeat center center fixed; /* Evita la duplicación */
+    background-size: cover; /* Asegura que cubra toda la pantalla */
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; /* Evita la duplicación de la imagen */
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede la pantalla */
+    align-items: flex-start; /* Evita que el contenido se centre verticalmente */
+    overflow-y: auto;
 }
 
 .container {
@@ -28,11 +26,10 @@ body {
     min-height: 100vh;
     max-width: 1200px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.8); /* Ajusta la opacidad del fondo */
+    background: rgba(255, 255, 255, 0.9); /* Fondo más opaco */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    overflow: hidden; /* Evita desbordamientos */
 }
 
 /* Header */
@@ -57,8 +54,11 @@ body {
 .content h1 {
     font-size: 2.5rem;
     color: #333;
-    position: relative;
-    z-index: 1;  /* Evita que otros elementos cubran el título */
+    position: sticky; /* Se mantiene visible al hacer scroll */
+    top: 0; /* Se fija en la parte superior */
+    background: rgba(255, 255, 255, 0.9); /* Fondo sólido para el título */
+    padding: 10px 0;
+    z-index: 10; /* Se asegura de que esté al frente */
 }
 
 .content p, .content a {
@@ -79,7 +79,7 @@ body {
 
 /* Sección de Administración */
 .admin-section {
-    background: rgba(255, 255, 255, 0.8); /* Ajusta opacidad */
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -129,8 +129,8 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 20px;
-    max-height: 400px;  /* Limita la altura */
-    overflow-y: auto;   /* Permite desplazamiento si hay muchos elementos */
+    max-height: 400px; /* Limita la altura */
+    overflow-y: auto; /* Permite desplazamiento en la lista */
 }
 
 #dinoList li {
@@ -180,4 +180,3 @@ body {
     border-radius: 0 0 10px 10px;
     margin-top: auto;
 }
-
