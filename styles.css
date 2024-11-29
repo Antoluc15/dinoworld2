@@ -56,10 +56,16 @@ html, body {
 }
 
 /* Título */
-.content h1 {
+.content .title {
     font-size: 2.5rem;
     color: #333;
-    margin-top: 100px; /* Asegura que no quede oculto por el header */
+    margin-top: 150px; /* Asegura que no quede oculto por el header */
+    text-align: center;
+}
+
+.content .subtitle {
+    font-size: 1.5rem;
+    color: #666;
     text-align: center;
 }
 
@@ -145,5 +151,3 @@ html, body {
     border-radius: 0 0 10px 10px;
     margin-top: 20px;
 }
-
-
