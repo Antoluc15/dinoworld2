@@ -6,9 +6,11 @@ window.addEventListener('load', () => {
     let gameSpeed = 2;  // Velocidad inicial de los obstáculos
     let obstacleFrequency = 100;  // Frecuencia de aparición de obstáculos
     let score = 0;  // Puntaje inicial
+    let gameOver = false; // Estado del juego
 
     // Función para iniciar el juego
     const startGame = () => {
+        gameOver = false; // Reiniciar estado de juego
         // Limpiar el contenedor del juego si ya existe algún juego previo
         dinoGameContainer.innerHTML = '';
 
@@ -33,6 +35,7 @@ window.addEventListener('load', () => {
         score = 0;
         gameSpeed = 2;
         obstacleFrequency = 100;
+        gameOver = false;
         startGame();
     };
 
@@ -74,6 +77,15 @@ window.addEventListener('load', () => {
                 });
             };
 
+            // Función para mostrar el mensaje de "Perdido"
+            const showGameOverMessage = () => {
+                ctx.font = '30px Arial';
+                ctx.fillStyle = 'red';
+                ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
+                ctx.font = '20px Arial';
+                ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
+            };
+
             // Actualizar los obstáculos
             const updateObstacles = () => {
                 obstacles.forEach((obstacle) => {
@@ -92,9 +104,8 @@ window.addEventListener('load', () => {
                         dino.x < obstacle.x + obstacle.width &&
                         dino.y + dino.height > obstacle.y
                     ) {
-                        // Colisión detectada, reiniciar juego
-                        alert('¡Has perdido!');
-                        restartGame();
+                        // Colisión detectada, termina el juego
+                        gameOver = true;
                     }
                 });
             };
@@ -104,30 +115,34 @@ window.addEventListener('load', () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawBackground(); // Dibujar fondo
 
-                // Gravedad y salto del dinosaurio
-                if (isJumping) {
-                    dino.dy = jumpHeight;
-                } else {
-                    if (dino.y + dino.height < 150) {
-                        dino.dy += gravity;
+                if (!gameOver) {
+                    // Gravedad y salto del dinosaurio
+                    if (isJumping) {
+                        dino.dy = jumpHeight;
                     } else {
-                        dino.dy = 0;
-                        dino.y = 150;
-                        isJumping = false;
+                        if (dino.y + dino.height < 150) {
+                            dino.dy += gravity;
+                        } else {
+                            dino.dy = 0;
+                            dino.y = 150;
+                            isJumping = false;
+                        }
                     }
-                }
-                dino.y += dino.dy;
+                    dino.y += dino.dy;
 
-                // Aumentar la velocidad y la frecuencia de los obstáculos con el tiempo
-                if (score % 100 === 0 && score !== 0) {
-                    gameSpeed += 0.5;  // Aumentar la velocidad de los obstáculos
-                    obstacleFrequency -= 5; // Reducir la frecuencia de aparición
-                }
+                    // Aumentar la velocidad y la frecuencia de los obstáculos con el tiempo
+                    if (score % 100 === 0 && score !== 0) {
+                        gameSpeed += 0.5;  // Aumentar la velocidad de los obstáculos
+                        obstacleFrequency -= 5; // Reducir la frecuencia de aparición
+                    }
 
-                updateObstacles();
-                drawDino();
-                drawObstacles();
-                detectCollisions();
+                    updateObstacles();
+                    drawDino();
+                    drawObstacles();
+                    detectCollisions();
+                } else {
+                    showGameOverMessage(); // Mostrar el mensaje de Game Over
+                }
             };
 
             // Crear obstáculos
@@ -146,7 +161,7 @@ window.addEventListener('load', () => {
 
             // Detectar evento de salto
             document.addEventListener('keydown', (event) => {
-                if (event.key === " " && dino.y === 150) {
+                if (event.key === " " && dino.y === 150 && !gameOver) {
                     isJumping = true;
                 }
             });
