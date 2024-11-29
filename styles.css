@@ -176,3 +176,80 @@ body {
     border-radius: 0 0 10px 10px;
     margin-top: auto;
 }
+
+#chrome-dino-game {
+    text-align: center;
+    margin: 50px auto;
+    
+    h2 {
+        font-size: 2rem;
+        color: #2c3e50;
+    }
+
+    #game-container {
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #game-over {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: red;
+        display: none; /* Asegúrate de que inicialmente esté oculto */
+    }
+
+    button {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #2980b9;
+        }
+    }
+}
+
+#chrome-dino-game {
+    text-align: center;
+    margin: 50px auto;
+}
+
+#chrome-dino-game h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+#chrome-dino-game #game-container {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#chrome-dino-game #game-over {
+    display: none; /* Asegúrate de que inicialmente esté oculto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: red;
+}
+
+#chrome-dino-game button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chrome-dino-game button:hover {
+    background-color: #2980b9;
+}
+
