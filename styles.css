@@ -1,9 +1,22 @@
-/* Aseguramos que la página se mantenga con un flujo adecuado */
-body, html {
-    height: 100%;
+/* Reset de márgenes y relleno */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -163,5 +176,3 @@ body, html {
     border-radius: 0 0 10px 10px;
     margin-top: auto;
 }
-
-
