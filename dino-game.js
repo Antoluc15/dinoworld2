@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
 
         let dino = { x: 50, y: 150, width: 40, height: 40, speed: 5 };
         let gravity = 0.6;  // Gravedad más suave
-        let jumpHeight = -12;  // Ajustar la altura del salto
+        let jumpHeight = -36;  // Ajustar la altura del salto a 3 veces lo anterior
         let isJumping = false;
         let jumpVelocity = 0;
         let obstacles = [];
@@ -157,4 +157,3 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
-
