@@ -217,7 +217,7 @@ body {
 
 
 #restartGameButton {
-    display: block;
+    display: none; /* Por defecto oculto */
     margin: 10px auto;
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -232,9 +232,10 @@ body {
     z-index: 999; /* Asegura que esté por encima de todos los elementos */
 }
 
-
 #restartGameButton:active {
     background-color: #45a049;
 }
+
+
 
 
