@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dino
     const dino = document.createElement('img');
-    dino.src = './img/dino.png';
+    dino.src = './img/dinosaurio/run(1).png';
     dino.style.position = 'absolute';
     dino.style.width = '50px';
     dino.style.height = '50px';
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cactus
     const cactus = document.createElement('img');
-    cactus.src = './img/cactus.png';
+    cactus.src = './img/cactus/vecteezy_simple-cactus-cartoon-illustration_9514641.jpg';
     cactus.style.position = 'absolute';
     cactus.style.width = '30px';
     cactus.style.height = '50px';
