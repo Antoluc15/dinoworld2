@@ -47,9 +47,9 @@ window.addEventListener('load', () => {
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg';
 
         let dino = { x: 50, y: 150, width: 40, height: 40, dy: 0, speed: 5 };
-        let gravity = 0.8;
+        let gravity = 0.6;  // Gravedad más suave
         let isJumping = false;
-        let jumpHeight = -10;
+        let jumpHeight = -12;  // Ajustar la altura del salto
         let obstacles = [];
 
         dinoImg.onload = () => {
@@ -73,7 +73,7 @@ window.addEventListener('load', () => {
                 ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
                 ctx.font = '20px Arial';
                 ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
-                restartGameButton.style.display = 'block'; // Mostrar el botón de reiniciar
+                restartGameButton.style.display = 'block';
             };
 
             const updateObstacles = () => {
@@ -141,7 +141,7 @@ window.addEventListener('load', () => {
             }, 1000 / 60);
 
             document.addEventListener('keydown', (event) => {
-                if (event.key === " " && dino.y >= 150 && !gameOver) {
+                if (event.key === " " && dino.y === 150 && !gameOver) {
                     isJumping = true;
                 }
             });
@@ -153,3 +153,4 @@ window.addEventListener('load', () => {
     startGameButton.addEventListener('click', startGame);
     restartGameButton.addEventListener('click', restartGame);
 });
+
