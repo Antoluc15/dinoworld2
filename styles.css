@@ -12,12 +12,12 @@ html, body {
 
 /* Fondo del cuerpo */
 body {
-    background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
+   background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-color: green;
-    height: 100vh;
+    background-attachment: fixed;
+    margin: 0;
 }
 
 /* Contenedor principal */
