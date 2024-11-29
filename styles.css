@@ -209,6 +209,7 @@ body {
     margin-right: auto;
 }
 
+/* Estilo para el botón de reinicio */
 #restartGameButton {
     display: none; /* Por defecto oculto */
     margin: 10px auto;
@@ -228,5 +229,6 @@ body {
 #restartGameButton:active {
     background-color: #45a049;
 }
+
 
 
