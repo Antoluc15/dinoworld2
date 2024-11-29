@@ -69,13 +69,21 @@ window.addEventListener('load', () => {
             });
         };
 
+        // Función para mostrar el puntaje
+        const drawScore = () => {
+            ctx.font = '20px Arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText(`Puntaje: ${score}`, canvas.width - 150, 30);
+        };
+
         // Mostrar mensaje de "Game Over"
         const showGameOverMessage = () => {
             ctx.font = '30px Arial';
             ctx.fillStyle = 'red';
             ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
             ctx.font = '20px Arial';
-            ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 40);
+            ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 40);
+            ctx.fillText('Presiona "Reiniciar" para jugar de nuevo', canvas.width / 2 - 150, canvas.height / 2 + 70);
             restartGameButton.style.display = 'block'; // Mostrar el botón de reinicio
             restartGameButton.style.zIndex = '10'; // Asegúrate de que esté en frente
         };
@@ -84,6 +92,10 @@ window.addEventListener('load', () => {
         const updateObstacles = () => {
             obstacles.forEach((obstacle) => {
                 obstacle.x -= gameSpeed;
+                if (obstacle.x + obstacle.width < dino.x && !obstacle.counted) {
+                    score += 1; // Incrementa el puntaje por cada cactus esquivado
+                    obstacle.counted = true; // Marca el cactus como contado
+                }
             });
             if (obstacles[0] && obstacles[0].x < 0) {
                 obstacles.shift();
@@ -125,6 +137,7 @@ window.addEventListener('load', () => {
                 drawDino();
                 drawObstacles();
                 detectCollisions();
+                drawScore();
             } else {
                 showGameOverMessage();
             }
@@ -133,7 +146,7 @@ window.addEventListener('load', () => {
         // Crear obstáculos
         const createObstacle = () => {
             if (Math.random() < 1 / obstacleFrequency) {
-                obstacles.push({ x: canvas.width, y: 150, width: 20, height: 30 });
+                obstacles.push({ x: canvas.width, y: 150, width: 20, height: 30, counted: false });
             }
         };
 
