@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const dinoForm = document.getElementById("dinoForm");
     const dinoList = document.getElementById("dinoList");
 
-    // Función para cargar todos los dinosaurios
     function fetchDinosaurios() {
         fetch(API_URL)
             .then(response => response.json())
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Error al obtener dinosaurios:", error));
     }
 
-    // Función para agregar un dinosaurio a la lista
     function addDinoToList(dino) {
         const li = document.createElement("li");
         li.innerHTML = `${dino.nombre} - ${dino.especie} (${dino.periodo})<br>
@@ -28,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         dinoList.appendChild(li);
     }
 
-    // Enviar el formulario para agregar o editar un dinosaurio
     dinoForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -55,38 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             console.log("Respuesta del servidor:", data);
             dinoForm.reset();
-            if (method === "POST") {
-                addDinoToList(data);
-            } else {
-                fetchDinosaurios();
-            }
+            fetchDinosaurios(); // Recargar la lista de dinosaurios
         })
         .catch(error => console.error("Error al guardar el dinosaurio:", error));
     });
 
-    // Función para editar un dinosaurio
     window.editDino = (id) => {
-        fetch(`${API_URL}?id=${id}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); // Verifica la respuesta del servidor aquí
-                document.getElementById("dinoId").value = data.id;
-                document.getElementById("nombre").value = data.nombre;
-                document.getElementById("especie").value = data.especie;
-                document.getElementById("periodo").value = data.periodo;
-                document.getElementById("descripcion").value = data.descripcion;
-                document.getElementById("imagen").value = data.imagen;
-            })
-            .catch(error => console.error("Error al editar dinosaurio:", error));
-    };
-   
-    // Función para eliminar un dinosaurio
-    window.deleteDino = (id) => {
-        fetch(`${API_URL}?id=${id}`, {method: "DELETE"})
-            .then(() => fetchDinosaurios())
-            .catch(error => console.error("Error al eliminar dinosaurio:", error));
-    };
-
-    // Cargar los dinosaurios al cargar la página
-    fetchDinosaurios();
-});
+        fetch(`${[_{{{CITATION{{{_1{](https://github.com/la9una/web/tree/ba1073ae044ebb7b538a3b13f0f9598f7c410bb6/docs%2Fbootstrap%2Falignci.md)
