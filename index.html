@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DinoWorld</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DinoWorld</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Nueva capa para el fondo -->
-    <div class="background"></div> 
+  <!-- Nueva capa para el fondo -->
+  <div class="background"></div>
 
-    <!-- Contenedor principal -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <img src="logo-JP.jpg" alt="Logo del sitio" class="logo">
-            <h1 class="title">Bienvenidos a Jurassic World</h1>
-        </header>
-        
-        <!-- Main Content -->
-        <main class="content">
-            <h2 class="subtitle">Aquí podrás encontrar un enlace de la pelea del Therizinosaurus y T.Rex vs Giganotosaurus</h2>
-            <center><a href="https://youtu.be/Q_uFdzNteiY?si=zFS9p4UNcONHvIB6" target="_blank">Ver Video</a></center>
-        </main>
-        
-        <!-- Sección de Administración -->
-        <section class="admin-section">
-            <center><h2>Administrar Dinosaurios</h2></center>
-            
-            <!-- Formulario para agregar o editar dinosaurios -->
-            <form id="dinoForm">
-                <input type="hidden" id="dinoId">
-                <input type="text" id="nombre" placeholder="Nombre" required>
-                <input type="text" id="especie" placeholder="Especie" required>
-                <input type="text" id="periodo" placeholder="Periodo" required>
-                <textarea id="descripcion" placeholder="Descripción"></textarea>
-                <input type="text" id="imagen" placeholder="URL de la imagen">
-                <button type="submit">Guardar</button>
-            </form>
-            
-            <!-- Lista de dinosaurios -->
-            <ul id="dinoList"></ul>
-        </section>
+  <!-- Contenedor principal -->
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <img src="logo-JP.jpg" alt="Logo del sitio" class="logo">
+    </header>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Curso: Conceptualización de servicios en la nube</p>
-            <p>Nombre: José Antonio Barrios Rodríguez</p>
-            <p>Código: 210719887</p>
-            <p>Correo: anto100.br@gmail.com</p>
-        </footer>
-    </div>
+    <!-- Main Content -->
+    <main class="content">
+      <h1 class="title">Bienvenidos a Jurassic World</h1>
+      <h2 class="subtitle">Aquí podrás encontrar un enlace de la pelea del Therizinosaurus y T.Rex vs Giganotosaurus</h2>
+      <a href="https://youtu.be/Q_uFdzNteiY?si=zFS9p4UNcONHvIB6" target="_blank">Ver Video</a>
+    </main>
 
-    <script src="script.js"></script>
+    <!-- Sección de Administración -->
+    <section class="admin-section">
+      <h2>Administrar Dinosaurios</h2>
+      <!-- Formulario para agregar o editar dinosaurios -->
+      <form id="dinoForm">
+        <input type="hidden" id="dinoId">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="especie" placeholder="Especie" required>
+        <input type="text" id="periodo" placeholder="Periodo" required>
+        <textarea id="descripcion" placeholder="Descripción"></textarea>
+        <input type="text" id="imagen" placeholder="URL de la imagen">
+        <button type="submit">Guardar</button>
+      </form>
+
+      <!-- Lista de dinosaurios -->
+      <ul id="dinoList"></ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Curso: Conceptualización de servicios en la nube</p>
+      <p>Nombre: José Antonio Barrios Rodríguez</p>
+      <p>Código: 210719887</p>
+      <p>Correo: anto100.br@gmail.com</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
