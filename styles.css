@@ -13,6 +13,7 @@ html, body {
 /* Fondo del cuerpo */
 body {
     background-image: url('hd-jurassic-park-movie-scene-ucyjkewbywehk7ij.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -177,3 +178,43 @@ body {
     margin-top: auto;
     border-radius: 0 0 10px 10px;
 }
+
+#dinoGameSection {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#dinoGameSection h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#dinoGameSection #startGameButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dinoGameSection #startGameButton:hover {
+    background-color: #218838;
+}
+
+#gameContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
