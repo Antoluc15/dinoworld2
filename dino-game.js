@@ -55,99 +55,105 @@ window.addEventListener('load', () => {
         let jumpHeight = -15;
         let obstacles = [];
 
-        // Función para dibujar el fondo
-        const drawBackground = () => {
-            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-        };
+        // Esperar a que las imágenes estén cargadas antes de iniciar el juego
+        dinoImg.onload = () => {
+            // Función para dibujar el fondo
+            const drawBackground = () => {
+                ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+            };
 
-        // Función para dibujar el dinosaurio
-        const drawDino = () => {
-            ctx.drawImage(dinoImg, 0, 0, 60, 60, dino.x, dino.y, dino.width, dino.height);
-        };
+            // Función para dibujar el dinosaurio
+            const drawDino = () => {
+                ctx.drawImage(dinoImg, 0, 0, 60, 60, dino.x, dino.y, dino.width, dino.height);
+            };
 
-        // Función para dibujar los obstáculos
-        const drawObstacles = () => {
-            obstacles.forEach((obstacle) => {
-                ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-            });
-        };
+            // Función para dibujar los obstáculos
+            const drawObstacles = () => {
+                obstacles.forEach((obstacle) => {
+                    ctx.drawImage(cactusImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                });
+            };
 
-        // Actualizar los obstáculos
-        const updateObstacles = () => {
-            obstacles.forEach((obstacle) => {
-                obstacle.x -= gameSpeed; // La velocidad de los obstáculos ahora depende de gameSpeed
-            });
-            if (obstacles[0] && obstacles[0].x < 0) {
-                obstacles.shift();
-            }
-        };
-
-        // Detectar colisiones
-        const detectCollisions = () => {
-            obstacles.forEach((obstacle) => {
-                if (
-                    dino.x + dino.width > obstacle.x &&
-                    dino.x < obstacle.x + obstacle.width &&
-                    dino.y + dino.height > obstacle.y
-                ) {
-                    // Colisión detectada, reiniciar juego
-                    alert('¡Has perdido!');
-                    restartGame();
+            // Actualizar los obstáculos
+            const updateObstacles = () => {
+                obstacles.forEach((obstacle) => {
+                    obstacle.x -= gameSpeed; // La velocidad de los obstáculos ahora depende de gameSpeed
+                });
+                if (obstacles[0] && obstacles[0].x < 0) {
+                    obstacles.shift();
                 }
-            });
-        };
+            };
 
-        // Actualizar el estado del juego
-        const updateGame = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBackground(); // Dibujar fondo
+            // Detectar colisiones
+            const detectCollisions = () => {
+                obstacles.forEach((obstacle) => {
+                    if (
+                        dino.x + dino.width > obstacle.x &&
+                        dino.x < obstacle.x + obstacle.width &&
+                        dino.y + dino.height > obstacle.y
+                    ) {
+                        // Colisión detectada, reiniciar juego
+                        alert('¡Has perdido!');
+                        restartGame();
+                    }
+                });
+            };
 
-            // Gravedad y salto del dinosaurio
-            if (isJumping) {
-                dino.dy = jumpHeight;
-            } else {
-                if (dino.y + dino.height < 150) {
-                    dino.dy += gravity;
+            // Actualizar el estado del juego
+            const updateGame = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBackground(); // Dibujar fondo
+
+                // Gravedad y salto del dinosaurio
+                if (isJumping) {
+                    dino.dy = jumpHeight;
                 } else {
-                    dino.dy = 0;
-                    dino.y = 150;
-                    isJumping = false;
+                    if (dino.y + dino.height < 150) {
+                        dino.dy += gravity;
+                    } else {
+                        dino.dy = 0;
+                        dino.y = 150;
+                        isJumping = false;
+                    }
                 }
-            }
-            dino.y += dino.dy;
+                dino.y += dino.dy;
 
-            // Aumentar la velocidad y la frecuencia de los obstáculos con el tiempo
-            if (score % 100 === 0 && score !== 0) {
-                gameSpeed += 0.5;  // Aumentar la velocidad de los obstáculos
-                obstacleFrequency -= 5; // Reducir la frecuencia de aparición
-            }
+                // Aumentar la velocidad y la frecuencia de los obstáculos con el tiempo
+                if (score % 100 === 0 && score !== 0) {
+                    gameSpeed += 0.5;  // Aumentar la velocidad de los obstáculos
+                    obstacleFrequency -= 5; // Reducir la frecuencia de aparición
+                }
 
-            updateObstacles();
-            drawDino();
-            drawObstacles();
-            detectCollisions();
+                updateObstacles();
+                drawDino();
+                drawObstacles();
+                detectCollisions();
+            };
+
+            // Crear obstáculos
+            const createObstacle = () => {
+                if (Math.random() < 1 / obstacleFrequency) {
+                    let height = 150 + Math.random() * 30;
+                    obstacles.push({ x: canvas.width, y: height, width: 20, height: 30 });
+                }
+            };
+
+            // Iniciar el loop del juego
+            setInterval(() => {
+                updateGame();
+                createObstacle();
+            }, 1000 / 60);
+
+            // Detectar evento de salto
+            document.addEventListener('keydown', (event) => {
+                if (event.key === " " && dino.y === 150) {
+                    isJumping = true;
+                }
+            });
         };
 
-        // Crear obstáculos
-        const createObstacle = () => {
-            if (Math.random() < 1 / obstacleFrequency) {
-                let height = 150 + Math.random() * 30;
-                obstacles.push({ x: canvas.width, y: height, width: 20, height: 30 });
-            }
-        };
-
-        // Iniciar el loop del juego
-        setInterval(() => {
-            updateGame();
-            createObstacle();
-        }, 1000 / 60);
-
-        // Detectar evento de salto
-        document.addEventListener('keydown', (event) => {
-            if (event.key === " " && dino.y === 150) {
-                isJumping = true;
-            }
-        });
+        // Cargar imágenes
+        dinoImg.src = 'img/dinosaurio/vecteezy_brontosaurus-jump-png-illustrations_23271261.png'; // Imagen del dinosaurio
     };
 
     // Asignar eventos a los botones
