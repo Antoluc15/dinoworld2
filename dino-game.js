@@ -3,6 +3,10 @@ window.addEventListener('load', () => {
     const restartGameButton = document.getElementById('restartGameButton');
     const dinoGameContainer = document.getElementById('dinoGameContainer');
 
+    let gameSpeed = 2;  // Velocidad inicial de los obstáculos
+    let obstacleFrequency = 100;  // Frecuencia de aparición de obstáculos
+    let score = 0;  // Puntaje inicial
+
     // Función para iniciar el juego
     const startGame = () => {
         // Limpiar el contenedor del juego si ya existe algún juego previo
@@ -26,6 +30,9 @@ window.addEventListener('load', () => {
 
     // Función para reiniciar el juego
     const restartGame = () => {
+        score = 0;
+        gameSpeed = 2;
+        obstacleFrequency = 100;
         startGame();
     };
 
@@ -47,7 +54,6 @@ window.addEventListener('load', () => {
         let isJumping = false;
         let jumpHeight = -15;
         let obstacles = [];
-        let obstacleFrequency = 100;
 
         const drawBackground = () => {
             ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
@@ -65,7 +71,7 @@ window.addEventListener('load', () => {
 
         const updateObstacles = () => {
             obstacles.forEach((obstacle) => {
-                obstacle.x -= 5; // Velocidad de los obstáculos
+                obstacle.x -= gameSpeed; // La velocidad de los obstáculos ahora depende de gameSpeed
             });
             if (obstacles[0] && obstacles[0].x < 0) {
                 obstacles.shift();
@@ -89,6 +95,8 @@ window.addEventListener('load', () => {
         const updateGame = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBackground(); // Dibujar fondo
+
+            // Gravedad y salto del dinosaurio
             if (isJumping) {
                 dino.dy = jumpHeight;
             } else {
@@ -101,6 +109,13 @@ window.addEventListener('load', () => {
                 }
             }
             dino.y += dino.dy;
+
+            // Aumentar la velocidad y la frecuencia de los obstáculos con el tiempo
+            if (score % 100 === 0 && score !== 0) {
+                gameSpeed += 0.5;  // Aumentar la velocidad de los obstáculos
+                obstacleFrequency -= 5; // Reducir la frecuencia de aparición
+            }
+
             updateObstacles();
             drawDino();
             drawObstacles();
@@ -108,7 +123,7 @@ window.addEventListener('load', () => {
         };
 
         const createObstacle = () => {
-            if (Math.random() < 0.05) {
+            if (Math.random() < 1 / obstacleFrequency) {
                 let height = 150 + Math.random() * 30;
                 obstacles.push({ x: canvas.width, y: height, width: 20, height: 30 });
             }
