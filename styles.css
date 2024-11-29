@@ -181,12 +181,6 @@ body {
     border-radius: 0 0 10px 10px;
 }
 
-#dinoGameContainer {
-    position: relative; /* Asegura que los elementos dentro del contenedor tengan posiciones relativas */
-    z-index: 1; /* Asigna un z-index bajo para que otros elementos puedan estar encima */
-}
-
-
 .dino-game-section {
     margin-top: 30px;
     text-align: center;
@@ -215,7 +209,6 @@ body {
     margin-right: auto;
 }
 
-
 #restartGameButton {
     display: none; /* Por defecto oculto */
     margin: 10px auto;
@@ -235,7 +228,5 @@ body {
 #restartGameButton:active {
     background-color: #45a049;
 }
-
-
 
 
