@@ -209,6 +209,27 @@ body {
     margin-right: auto;
 }
 
+/* Estilo para el botón de reinicio */
+#restartGameButton {
+    display: none; /* Por defecto oculto */
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed; /* Usa position: fixed para que esté siempre visible */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Asegura que esté por encima de todos los elementos */
+}
+
+#restartGameButton:active {
+    background-color: #45a049;
+}
+
 
 
 
