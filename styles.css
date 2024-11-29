@@ -209,18 +209,20 @@ body {
     margin-right: auto;
 }
 
-#restartGameButton {
-    display: none;  /* Lo mantenemos oculto inicialmente */
-    margin-top: 20px;
+
+#startGameButton, #restartGameButton {
+    display: block;
+    margin: 10px auto;
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: #f44336;
+    background-color: #4CAF50;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-#restartGameButton:hover {
-    background-color: #d32f2f;
+#startGameButton:active, #restartGameButton:active {
+    background-color: #45a049;
 }
+
 
