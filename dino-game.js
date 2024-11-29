@@ -53,9 +53,9 @@ window.addEventListener('load', () => {
         bgImg.src = 'img/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447_346/vecteezy_desert-of-africa-or-wild-west-arizona-landscape_16265447.jpg'; // Imagen de fondo
 
         let dino = { x: 50, y: 150, width: 40, height: 40, dy: 0, speed: 5 };
-        let gravity = 1;
+        let gravity = 0.8;  // Gravedad más suave
         let isJumping = false;
-        let jumpHeight = -15;
+        let jumpHeight = -10;  // Ajustar la altura del salto
         let obstacles = [];
 
         // Esperar a que las imágenes estén cargadas antes de iniciar el juego
@@ -67,7 +67,6 @@ window.addEventListener('load', () => {
 
             // Función para dibujar el dinosaurio
             const drawDino = () => {
-                // Redimensionar la imagen del dinosaurio para que se ajuste al lienzo
                 ctx.drawImage(dinoImg, 0, 0, dinoImg.width, dinoImg.height, dino.x, dino.y, dino.width, dino.height);
             };
 
@@ -122,7 +121,7 @@ window.addEventListener('load', () => {
                         dino.dy = jumpHeight;
                     } else {
                         if (dino.y + dino.height < 150) {
-                            dino.dy += gravity;
+                            dino.dy += gravity;  // La gravedad influye en el salto
                         } else {
                             dino.dy = 0;
                             dino.y = 150;
@@ -162,7 +161,7 @@ window.addEventListener('load', () => {
 
             // Detectar evento de salto
             document.addEventListener('keydown', (event) => {
-                if (event.key === " " && dino.y === 150 && !gameOver) {
+                if (event.key === " " && dino.y === 150 && !gameOver) {  // Verificar que el dinosaurio esté en el suelo
                     isJumping = true;
                 }
             });
