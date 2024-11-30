@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 
+# Verifica la instalación de Node.js y npm
+RUN node -v
+RUN npm -v
+
 # Instala herramientas de desarrollo PHP y extensiones
 RUN apt-get update && apt-get install -y \
     libpq-dev \
@@ -24,14 +28,7 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
 
-# Verifica que npm esté disponible
-RUN which npm
-
-# Limpia la caché de npm
-RUN npm cache clean --force
-
-# Elimina la carpeta node_modules y vuelve a instalar las dependencias
-RUN rm -rf node_modules
+# Instala dependencias de Node.js
 COPY package*.json ./
 RUN npm install
 
