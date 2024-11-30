@@ -43,6 +43,7 @@ app.get('/api/highscore', async (req, res) => {
 // Ruta para actualizar el récord global
 app.post('/api/highscore', async (req, res) => {
   const { score } = req.body;
+  console.log('Score received:', score); // Log para verificar que el puntaje ha sido recibido
   try {
     await pool.query('INSERT INTO highscore (score) VALUES ($1)', [score]);
     res.status(201).json({ message: 'High score updated' });
