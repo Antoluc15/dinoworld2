@@ -90,15 +90,16 @@ window.addEventListener('load', () => {
         // Mostrar mensaje de "Game Over"
         const showGameOverMessage = () => {
             ctx.font = '30px Arial';
-            ctx.fillStyle = 'red';
-            ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';  // Alinear texto al centro
+            ctx.fillText('¡Has Perdido!', canvas.width / 2, canvas.height / 2 - 20);
             ctx.font = '20px Arial';
             if (isSmallScreen()) {
-                ctx.fillText('Toca la pantalla para reiniciar', canvas.width / 2 - 100, canvas.height / 2 + 40);
+                ctx.fillText('Toca la pantalla para reiniciar', canvas.width / 2, canvas.height / 2 + 20);
             } else {
-                ctx.fillText('Presiona "Espacio" o toca la pantalla para reiniciar', canvas.width / 2 - 150, canvas.height / 2 + 40);
+                ctx.fillText('Presiona "Espacio" o toca la pantalla para reiniciar', canvas.width / 2, canvas.height / 2 + 20);
             }
-            ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 70);
+            ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2, canvas.height / 2 + 50);
 
             // Actualizar el récord más alto si es necesario
             if (score > highScore) {
@@ -106,7 +107,7 @@ window.addEventListener('load', () => {
                 localStorage.setItem('highScore', highScore);  // Guardar el nuevo récord más alto en localStorage
             }
 
-            ctx.fillText(`Récord: ${highScore}`, canvas.width / 2 - 70, canvas.height / 2 + 100);
+            ctx.fillText(`Récord: ${highScore}`, canvas.width / 2, canvas.height / 2 + 80);
         };
 
         // Actualizar los obstáculos
