@@ -8,6 +8,10 @@ window.addEventListener('load', () => {
     let gameOver = false;
     let gameInterval;  // Variable para almacenar el intervalo del juego
 
+    const isSmallScreen = () => {
+        return window.innerWidth <= 600;
+    };
+
     const startGame = () => {
         gameOver = false;
         score = 0;
@@ -17,7 +21,11 @@ window.addEventListener('load', () => {
         dinoGameContainer.innerHTML = '';
 
         const title = document.createElement('h3');
-        title.innerText = '¡Juega con el Dinosaurio! Presiona "Espacio" para saltar';
+        if (isSmallScreen()) {
+            title.innerText = '¡Juega con el Dinosaurio! Toca la pantalla para saltar';
+        } else {
+            title.innerText = '¡Juega con el Dinosaurio! Presiona "Espacio" o toca la pantalla para saltar';
+        }
         dinoGameContainer.appendChild(title);
 
         const canvas = document.createElement('canvas');
@@ -81,8 +89,12 @@ window.addEventListener('load', () => {
             ctx.fillStyle = 'red';
             ctx.fillText('¡Has Perdido!', canvas.width / 2 - 100, canvas.height / 2);
             ctx.font = '20px Arial';
-            ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 40);
-            ctx.fillText('Presiona "Espacio" para reiniciar', canvas.width / 2 - 150, canvas.height / 2 + 70);
+            if (isSmallScreen()) {
+                ctx.fillText('Toca la pantalla para reiniciar', canvas.width / 2 - 100, canvas.height / 2 + 40);
+            } else {
+                ctx.fillText('Presiona "Espacio" o toca la pantalla para reiniciar', canvas.width / 2 - 150, canvas.height / 2 + 40);
+            }
+            ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 70);
         };
 
         // Actualizar los obstáculos
@@ -155,16 +167,27 @@ window.addEventListener('load', () => {
         }, 1000 / 60);
 
         // Detectar salto del dinosaurio y reinicio del juego
-        document.addEventListener('keydown', (event) => {
-            if (event.key === " " && !gameOver) {
+        const handleJumpAndRestart = () => {
+            if (!gameOver) {
                 if (dino.jumpCount < maxJumps) {
                     dino.isJumping = true;
                     dino.jumpSpeed = jumpHeight;
                     dino.jumpCount++;
                 }
-            } else if (event.key === " " && gameOver) {
+            } else if (gameOver) {
                 restartGame();
             }
+        };
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === " ") {
+                handleJumpAndRestart();
+            }
+        });
+
+        // Detectar toque en pantalla para dispositivos táctiles
+        document.addEventListener('touchstart', () => {
+            handleJumpAndRestart();
         });
     };
 
