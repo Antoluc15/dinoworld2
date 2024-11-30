@@ -3,9 +3,6 @@ const path = require('path');
 const { Pool } = require('pg');  // Importamos Pool de pg para manejar la conexión a PostgreSQL
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -15,11 +12,11 @@ app.get('/', (req, res) => {
 
 // Conexión a la base de datos PostgreSQL
 const pool = new Pool({
-  user: 'your-database-user',
-  host: 'your-database-host',
-  database: 'your-database-name',
-  password: 'your-database-password',
-  port: 5432,  // El puerto predeterminado de PostgreSQL
+  user: process.env.DB_USER || 'your-database-user',
+  host: process.env.DB_HOST || 'your-database-host',
+  database: process.env.DB_NAME || 'your-database-name',
+  password: process.env.DB_PASSWORD || 'your-database-password',
+  port: process.env.DB_PORT || 5432,  // El puerto predeterminado de PostgreSQL
 });
 
 pool.connect((err) => {
@@ -30,6 +27,6 @@ pool.connect((err) => {
   console.log('Connected to the PostgreSQL database.');
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
