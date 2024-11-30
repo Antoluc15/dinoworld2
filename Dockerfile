@@ -1,6 +1,12 @@
 FROM php:8.1-apache
 
-# Actualiza los paquetes y herramientas de compilación
+# Instala Node.js y npm
+RUN apt-get update && apt-get install -y \
+    curl \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs
+
+# Instala herramientas de desarrollo PHP y extensiones
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libonig-dev \
@@ -15,7 +21,14 @@ COPY . /var/www/html/
 # Establece permisos correctos
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-# Exponemos el puerto 80
+# Establece el directorio de trabajo
+WORKDIR /var/www/html
+
+# Instala dependencias de Node.js
+COPY package*.json ./
+RUN npm install
+
+# Expone el puerto 80
 EXPOSE 80
 
 # Inicia el servidor Apache
