@@ -1,14 +1,14 @@
 FROM php:8.1-apache
 
-# Instala Node.js y npm
+# Instala Node.js y npm desde el repositorio oficial
 RUN apt-get update && apt-get install -y \
     curl \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
 
 # Verifica la instalación de Node.js y npm
-RUN node -v
-RUN npm -v
+RUN node -v && npm -v
 
 # Instala herramientas de desarrollo PHP y extensiones
 RUN apt-get update && apt-get install -y \
@@ -37,4 +37,3 @@ EXPOSE 80
 
 # Inicia el servidor Apache
 CMD ["apache2-foreground"]
-
