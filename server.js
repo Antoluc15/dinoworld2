@@ -29,17 +29,16 @@ pool.connect((err) => {
 });
 
 // Ruta para obtener el récord global
-app.post('/api/highscore', async (req, res) => {
-  const { score } = req.body;
+app.get('/api/highscore', async (req, res) => {
   try {
-    await pool.query('INSERT INTO highscore (score) VALUES ($1)', [score]);
-    res.status(201).json({ message: 'High score updated' });
+    const result = await pool.query('SELECT score FROM highscore ORDER BY score DESC LIMIT 1');
+    const highScore = result.rows[0] ? result.rows[0].score : 0;
+    res.json({ highScore });
   } catch (err) {
-    console.error('Error updating high score:', err);
-    res.status(500).json({ error: 'Error updating high score' });
+    console.error('Error fetching high score:', err);
+    res.status(500).json({ error: 'Error fetching high score' });
   }
 });
-
 
 // Ruta para actualizar el récord global
 app.post('/api/highscore', async (req, res) => {
