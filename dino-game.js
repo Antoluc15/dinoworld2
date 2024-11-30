@@ -17,6 +17,7 @@ window.addEventListener('load', async () => {
         try {
             const response = await fetch('/api/highscore');
             const data = await response.json();
+            console.log('High Score fetched:', data.highScore); // Log para depuración
             return data.highScore || 0;
         } catch (error) {
             console.error('Error fetching high score:', error);
@@ -26,11 +27,13 @@ window.addEventListener('load', async () => {
 
     async function updateHighScore(score) {
         try {
-            await fetch('/api/highscore', {
+            const response = await fetch('/api/highscore', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ score })
             });
+            const data = await response.json();
+            console.log('High Score updated:', data); // Log para depuración
         } catch (error) {
             console.error('Error updating high score:', error);
         }
@@ -122,6 +125,7 @@ window.addEventListener('load', async () => {
             if (score > highScore) {
                 highScore = score;
                 await updateHighScore(score);  // Actualizar el récord global en la base de datos
+                console.log('New high score set:', highScore); // Log para depuración
             }
 
             ctx.fillText(`Récord: ${highScore}`, canvas.width / 2, canvas.height / 2 + 80);
