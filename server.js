@@ -12,11 +12,11 @@ app.get('/', (req, res) => {
 
 // Conexión a la base de datos PostgreSQL
 const pool = new Pool({
-  user: process.env.DB_USER || 'your-database-user',
-  host: process.env.DB_HOST || 'your-database-host',
-  database: process.env.DB_NAME || 'your-database-name',
-  password: process.env.DB_PASSWORD || 'your-database-password',
-  port: process.env.DB_PORT || 5432,  // El puerto predeterminado de PostgreSQL
+  user: process.env.DB_USER || 'postgres',
+  host: process.env.DB_HOST || 'junction.proxy.rlwy.net',
+  database: process.env.DB_NAME ||  'railway',
+  password: process.env.DB_PASSWORD || 'DZPJJGlePMtBqPuWVwpiifqWyvvKkpuI',
+  port: process.env.DB_PORT || '21824';  // El puerto predeterminado de PostgreSQL
 });
 
 pool.connect((err) => {
