@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const { Pool } = require('pg');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors()); // Añadir CORS para manejar solicitudes cross-origin
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); // Para manejar JSON en solicitudes POST
 
@@ -46,8 +48,8 @@ app.post('/api/highscore', async (req, res) => {
   const { score } = req.body;
   console.log('Score received:', score); // Log para depuración
   try {
-    await pool.query('INSERT INTO highscore (score) VALUES ($1)', [score]);
-    console.log('High score updated successfully'); // Log para depuración
+    const result = await pool.query('INSERT INTO highscore (score) VALUES ($1)', [score]);
+    console.log('High score updated successfully:', result); // Log para depuración
     res.status(201).json({ message: 'High score updated' });
   } catch (err) {
     console.error('Error updating high score:', err);
