@@ -1,14 +1,20 @@
+# Etapa de construcción de Node.js
+FROM node:14 AS build
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia los archivos package.json y package-lock.json
+COPY package*.json ./
+
+# Instala las dependencias de Node.js
+RUN npm install
+
+# Copia el resto de los archivos de la aplicación
+COPY . .
+
+# Etapa de producción de PHP con Apache
 FROM php:8.1-apache
-
-# Instala Node.js y npm desde el repositorio oficial
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
-    && apt-get install -y nodejs
-
-# Verifica la instalación de Node.js y npm
-RUN node -v && npm -v
 
 # Instala herramientas de desarrollo PHP y extensiones
 RUN apt-get update && apt-get install -y \
@@ -19,18 +25,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql
 
-# Copia los archivos de tu proyecto
-COPY . /var/www/html/
+# Copia los archivos del directorio de Node.js desde la etapa de construcción
+COPY --from=build /app /var/www/html
 
 # Establece permisos correctos
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
-
-# Establece el directorio de trabajo
-WORKDIR /var/www/html
-
-# Instala dependencias de Node.js
-COPY package*.json ./
-RUN npm install
 
 # Expone el puerto 80
 EXPOSE 80
