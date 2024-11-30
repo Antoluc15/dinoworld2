@@ -7,6 +7,7 @@ window.addEventListener('load', () => {
     let score = 0;
     let gameOver = false;
     let gameInterval;  // Variable para almacenar el intervalo del juego
+    let highScore = localStorage.getItem('highScore') || 0;  // Obtener el récord más alto desde localStorage
 
     const isSmallScreen = () => {
         return window.innerWidth <= 600;
@@ -80,7 +81,10 @@ window.addEventListener('load', () => {
         const drawScore = () => {
             ctx.font = '20px Arial';
             ctx.fillStyle = 'black';
-            ctx.fillText(`Puntaje: ${score}`, canvas.width - 150, 30);
+            ctx.textAlign = 'left';  // Alinear texto a la izquierda
+            ctx.fillText(`Récord: ${highScore}`, 10, 30);
+            ctx.textAlign = 'right';  // Alinear texto a la derecha
+            ctx.fillText(`Puntaje: ${score}`, canvas.width - 10, 30);
         };
 
         // Mostrar mensaje de "Game Over"
@@ -95,6 +99,14 @@ window.addEventListener('load', () => {
                 ctx.fillText('Presiona "Espacio" o toca la pantalla para reiniciar', canvas.width / 2 - 150, canvas.height / 2 + 40);
             }
             ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 70, canvas.height / 2 + 70);
+
+            // Actualizar el récord más alto si es necesario
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('highScore', highScore);  // Guardar el nuevo récord más alto en localStorage
+            }
+
+            ctx.fillText(`Récord: ${highScore}`, canvas.width / 2 - 70, canvas.height / 2 + 100);
         };
 
         // Actualizar los obstáculos
