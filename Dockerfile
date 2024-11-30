@@ -24,7 +24,14 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
 
-# Instala dependencias de Node.js
+# Verifica que npm esté disponible
+RUN which npm
+
+# Limpia la caché de npm
+RUN npm cache clean --force
+
+# Elimina la carpeta node_modules y vuelve a instalar las dependencias
+RUN rm -rf node_modules
 COPY package*.json ./
 RUN npm install
 
@@ -33,3 +40,4 @@ EXPOSE 80
 
 # Inicia el servidor Apache
 CMD ["apache2-foreground"]
+
